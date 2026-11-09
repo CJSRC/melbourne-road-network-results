@@ -27,6 +27,7 @@ html,body{margin:0;height:100%;font-family:"Microsoft YaHei","Segoe UI",system-u
 .stat{background:#f6f8fa;border-radius:6px;padding:6px 8px;margin:6px 0;line-height:1.5}
 .leaflet-popup-content{font-size:13px;line-height:1.55}
 .arrow{font-size:13px;color:#1b4f72;text-shadow:0 0 2px #fff}
+.lanes{display:block;margin:5px 0 2px}.lanecap{font-size:11px;color:#666;line-height:1.4;max-width:280px}
 #tilewarn{display:none;position:absolute;z-index:1000;left:50%;top:8px;transform:translateX(-50%);background:#fff3cd;
  border:1px solid #e0b252;padding:6px 10px;border-radius:4px;font-size:13px;max-width:70%}
 @media (max-width:600px){.panel{width:calc(100% - 52px);max-height:45%}}
@@ -64,6 +65,7 @@ const W = {
     how: {read: "读图（无遮挡横断面的中位数）", class: "道路等级默认值", unread: "未单独判断的短段", old_img: "旧方法：读图", old_osm: "旧方法：OSM 或道路等级默认值"},
     stopsrc: {"v4": "旧方法：两次读取与 OSM 取大", "v6": "停止线读取", "section lanes": "停止线没读出：用该路段的车道数", "class default": "停止线没读出：道路等级默认值"},
     kmh: "km/h", lanesN: k => `${k} 条车道`, stopN: k => `停止线 ${k} 条`, arrows: "箭头（路缘到中线）", use: "各车道去向",
+    lanekey: "左侧为路缘，右侧为中线，上方横线为停止线。白色为路面上读到的箭头；灰色虚线表示该车道没有箭头，按规则推定去向（直行，路缘车道加左转，中线车道加右转）。",
     ref: {dtp: "DTP", council: "议会限速图", osm: "OSM", vm: "Vicmap", ai: "AI 盲评值", sheet: "SCATS 图纸"},
     leg: {both: "双向", one: "单向，箭头为行驶方向", lanes: k => `${k} 条`, sheetok: "与 SCATS 图纸一致", sheetbad: "与图纸不一致", nosheet: "没有图纸",
         fallback: "停止线没读出（用路段车道数）", bigger: "圆越大车道越多"},
@@ -100,6 +102,7 @@ const W = {
         old_img: "old method: read from photos", old_osm: "old method: OSM or class default"},
     stopsrc: {"v4": "old method: two readings and OSM, the larger", "v6": "stop line read", "section lanes": "stop line not read: the section's lanes", "class default": "stop line not read: class default"},
     kmh: "km/h", lanesN: k => `${k} lane${k === 1 ? "" : "s"}`, stopN: k => `${k} lane${k === 1 ? "" : "s"} at the stop line`, arrows: "Arrows (kerb to centre)", use: "Lane use",
+    lanekey: "Kerb on the left, centre on the right, stop line at the top. White: arrows read on the pavement; grey dashed: no arrow in that lane, use assumed by rule (through, plus left at the kerb and right at the centre).",
     ref: {dtp: "DTP", council: "Council map", osm: "OSM", vm: "Vicmap", ai: "AI blind value", sheet: "SCATS sheet"},
     leg: {both: "Two-way", one: "One-way, arrow shows travel", lanes: k => `${k} lane${k === 1 ? "" : "s"}`, sheetok: "Same as the SCATS sheet", sheetbad: "Differs from the sheet",
         nosheet: "No sheet", fallback: "Stop line not read (section lanes used)", bigger: "Larger circle, more lanes"},
@@ -123,6 +126,37 @@ const pct = (a, b) => b ? `${a}/${b} (${(100 * a / b).toFixed(1)}%)` : T().none;
 const link = u => u ? `<br><a href="${u}" target="_blank">${T().sv}</a>` : "";
 const nm = n => n ?? T().unnamed;
 const val = (v, missing) => v ?? missing;
+// ---- stop-line lanes drawn as pavement markings (9 November, the user): kerb on the left, the stop line at the top;
+// white = the arrow read in that lane, grey dashed = no arrow, the use assumed by rule (lane_use)
+const GLYPH = (moves, cx, painted) => {
+  const m = new Set(moves.map(w => w === "thru" ? "through" : w)), c = painted ? "#fff" : "#d5d8dc";
+  const st = painted ? `stroke="${c}" stroke-width="2.6"` : `stroke="${c}" stroke-width="1.8" stroke-dasharray="3 2"`;
+  const P = pts => `<polygon points="${pts.map(p => p.join(",")).join(" ")}" fill="${c}"/>`;
+  const L = d => `<path d="${d}" fill="none" ${st}/>`;
+  let top = 46, s = "";
+  if (m.has("through")) { s += P([[cx - 5, 13], [cx + 5, 13], [cx, 4]]); top = Math.min(top, 13); }
+  if (m.has("uturn")) { s += L(`M${cx},12 A6,6 0 0 1 ${cx + 12},12 L${cx + 12},18`) + P([[cx + 7, 18], [cx + 17, 18], [cx + 12, 25]]); top = Math.min(top, 12); }
+  if (m.has("left")) { s += L(`M${cx},32 Q${cx},22 ${cx - 10},22`) + P([[cx - 10, 17], [cx - 10, 27], [cx - 16, 22]]); top = Math.min(top, 32); }
+  if (m.has("right")) { const y = m.has("uturn") ? 34 : 22;
+    s += L(`M${cx},${y + 10} Q${cx},${y} ${cx + 9},${y}`) + P([[cx + 9, y - 5], [cx + 9, y + 5], [cx + 15, y]]); top = Math.min(top, y + 10); }
+  return s ? L(`M${cx},47 L${cx},${top}`) + s : "";
+};
+const laneStrip = (arr, use) => {
+  const A = arr ? arr.split("|") : [], U = use ? use.split("|") : [], n = Math.max(A.length, U.length);
+  if (!n) return "<br>";
+  const LW = 36, H = 50, w = n * LW + 4;
+  let s = `<rect width="${w}" height="${H}" rx="3" fill="#4d5656"/><line x1="0" y1="1.5" x2="${w}" y2="1.5" stroke="#fff" stroke-width="3"/>`
+    + `<line x1="2" y1="0" x2="2" y2="${H}" stroke="#fff" stroke-width="1.5"/>`
+    + `<line x1="${w - 2.5}" y1="0" x2="${w - 2.5}" y2="${H}" stroke="#fff" stroke-width="1.2"/><line x1="${w - 5.5}" y1="0" x2="${w - 5.5}" y2="${H}" stroke="#fff" stroke-width="1.2"/>`;
+  for (let i = 1; i < n; i++) s += `<line x1="${2 + i * LW}" y1="6" x2="${2 + i * LW}" y2="${H}" stroke="#fff" stroke-width="1.2" stroke-dasharray="6 5"/>`;
+  for (let i = 0; i < n; i++) {
+    const painted = !!A[i] && !["unmarked", "none"].includes(A[i]);
+    s += GLYPH(painted ? A[i].split("+") : (U[i] ? U[i].split(";") : []), 2 + i * LW + 18, painted);
+  }
+  const k = Math.min(1, 280 / w);
+  return `<svg class="lanes" width="${Math.round(w * k)}" height="${Math.round(H * k)}" viewBox="0 0 ${w} ${H}"><title>${arr || use}</title>${s}</svg>`
+    + `<div class="lanecap">${T().lanekey}</div>`;
+};
 
 // ---- map and background
 const map = L.map("map", {preferCanvas: true});
@@ -179,8 +213,8 @@ const VIEWS = {
     point: p => ({radius: 4 + 1.5 * Math.min(p.k, 6), color: "#333", weight: 1, fillOpacity: .85,
       fillColor: !p.read ? "#aaa" : p.sheet === null ? "#2471a3" : p.sheet === p.k ? "#1e8449" : "#c0392b"}),
     pop: p => `<b>${nm(p.n)}</b> (${T().site} ${p.site}, ${T().approach} ${p.id})<br><b style="font-size:16px">${T().stopN(p.k)}</b>　${T().stopsrc[p.src] || p.src}`
-      + (p.arr ? `<br>${T().arrows}: ${p.arr}` : "") + (p.use ? `<br>${T().use}: ${p.use}` : "")
-      + `<br>${T().ref.sheet}: ${val(p.sheet, T().none)}　${T().ref.osm}: ${val(p.osm, T().notag)}` + link(p.sv),
+      + laneStrip(p.arr, p.use)
+      + `${T().ref.sheet}: ${val(p.sheet, T().none)}　${T().ref.osm}: ${val(p.osm, T().notag)}` + link(p.sv),
     leg: () => `<div><span class="dot" style="background:#1e8449"></span>${T().leg.sheetok}</div><div><span class="dot" style="background:#c0392b"></span>${T().leg.sheetbad}</div>`
       + `<div><span class="dot" style="background:#2471a3"></span>${T().leg.nosheet}</div><div><span class="dot" style="background:#aaa"></span>${T().leg.fallback}</div><div>${T().leg.bigger}</div>`},
   photos: {filters: null,
