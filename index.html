@@ -1,14 +1,14 @@
-<!doctype html><html lang='zh'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>各区识别结果 / Results by area</title><style>
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Results by area / 各区识别结果</title><style>
 body{font-family:'Microsoft YaHei','Segoe UI',system-ui,sans-serif;margin:0 auto;max-width:1100px;padding:16px;color:#222;background:#fff}
 table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;padding:4px 8px}h2{margin-top:28px}img{max-width:100%;border:1px solid #eee}
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}a{color:#2471a3}figure{margin:0}
 .lang{position:fixed;top:10px;right:12px;display:flex;border:1px solid #2471a3;border-radius:4px;overflow:hidden;background:#fff}
 .lang button{border:0;background:#fff;color:#2471a3;padding:3px 9px;cursor:pointer}.lang button.on{background:#2471a3;color:#fff}
-body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
+body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='en'>
 <div class='lang'><button data-l='zh'>中文</button><button data-l='en'>EN</button></div>
 <div class='l-zh'><h1>各区识别结果</h1><p>每个区有可点击的网页（限速、方向、车道、停止线、拍摄点位五个图层）和几张静态图。AI 盲评值是模型盲评的结果，不是真值；真值只指 DTP、议会限速图、Vicmap 和 SCATS 信号配置图纸。OSM 只计它自己有标注的地方，缺失不补。</p>
-<p><a href='maps/all_areas_results.html' target='_blank'><b>打开各区识别结果网页</b></a></p>
+<p><a href='maps/all_areas_results.html?lang=zh' target='_blank'><b>打开各区识别结果网页</b></a></p>
 <h2>各区对比</h2><img src='summary_accuracy.png' alt='各区对比'>
 <h2>对比表</h2><p>同口径比较看后两列：在 OSM 有标注的同一批路段上，本方法和 OSM 各自的一致率。</p><table><tr><th>项目</th><th>参照</th><th>区</th><th>本方法（全部）</th><th>本方法（OSM 有标注处）</th><th>OSM（有标注处）</th><th>覆盖</th></tr>
 <tr><td>停止线车道</td><td>SCATS 图纸</td><td>Victoria Park</td><td>40/48（83.3%）</td><td>78.8%</td><td>21/33（63.6%）</td><td>读出 54/55</td></tr>
@@ -56,7 +56,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Footscray（旧方法）</td><td>1307/1912（68.4%）</td><td>69.8%</td><td>808/1575（51.3%）</td><td>有牌依据 1590/2314</td></tr>
 <tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Geelong</td><td>914/1171（78.1%）</td><td>83.2%</td><td>733/850（86.2%）</td><td>有牌依据 956/1351</td></tr>
 </table>
-<h2>Victoria Park</h2><p><a href='maps/all_areas_results.html#victoriapark' target='_blank'>打开 Victoria Park 的可点击网页</a></p><div class='figs'>
+<h2>Victoria Park</h2><p><a href='maps/all_areas_results.html?lang=zh#victoriapark' target='_blank'>打开 Victoria Park 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/victoriapark_stopline_map.png' target='_blank'><img src='figs/victoriapark_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/victoriapark_direction_map.png' target='_blank'><img src='figs/victoriapark_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/victoriapark_lanes_map.png' target='_blank'><img src='figs/victoriapark_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -65,7 +65,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <figure><a href='figs/victoriapark_assignment_compare.png' target='_blank'><img src='figs/victoriapark_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
 <figure><a href='figs/victoriapark_assignment_compare_x3.png' target='_blank'><img src='figs/victoriapark_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
 </div>
-<h2>North Melbourne</h2><p><a href='maps/all_areas_results.html#northmelbourne' target='_blank'>打开 North Melbourne 的可点击网页</a></p><div class='figs'>
+<h2>North Melbourne</h2><p><a href='maps/all_areas_results.html?lang=zh#northmelbourne' target='_blank'>打开 North Melbourne 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/northmelbourne_stopline_map.png' target='_blank'><img src='figs/northmelbourne_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/northmelbourne_direction_map.png' target='_blank'><img src='figs/northmelbourne_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/northmelbourne_lanes_map.png' target='_blank'><img src='figs/northmelbourne_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -74,7 +74,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <figure><a href='figs/northmelbourne_assignment_compare.png' target='_blank'><img src='figs/northmelbourne_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
 <figure><a href='figs/northmelbourne_assignment_compare_x3.png' target='_blank'><img src='figs/northmelbourne_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
 </div>
-<h2>Airport West</h2><p><a href='maps/all_areas_results.html#airportwest' target='_blank'>打开 Airport West 的可点击网页</a></p><div class='figs'>
+<h2>Airport West</h2><p><a href='maps/all_areas_results.html?lang=zh#airportwest' target='_blank'>打开 Airport West 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/airportwest_stopline_map.png' target='_blank'><img src='figs/airportwest_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/airportwest_direction_map.png' target='_blank'><img src='figs/airportwest_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/airportwest_lanes_map.png' target='_blank'><img src='figs/airportwest_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -83,7 +83,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <figure><a href='figs/airportwest_assignment_compare.png' target='_blank'><img src='figs/airportwest_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
 <figure><a href='figs/airportwest_assignment_compare_x3.png' target='_blank'><img src='figs/airportwest_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
 </div>
-<h2>Central Melbourne（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html#central' target='_blank'>打开 Central Melbourne 的可点击网页</a></p><div class='figs'>
+<h2>Central Melbourne（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html?lang=zh#central' target='_blank'>打开 Central Melbourne 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/central_stopline_map.png' target='_blank'><img src='figs/central_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/central_direction_map.png' target='_blank'><img src='figs/central_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/central_lanes_map.png' target='_blank'><img src='figs/central_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -92,7 +92,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <figure><a href='figs/central_assignment_compare.png' target='_blank'><img src='figs/central_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
 <figure><a href='figs/central_assignment_compare_x3.png' target='_blank'><img src='figs/central_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
 </div>
-<h2>Footscray（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html#footscray' target='_blank'>打开 Footscray 的可点击网页</a></p><div class='figs'>
+<h2>Footscray（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html?lang=zh#footscray' target='_blank'>打开 Footscray 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/footscray_stopline_map.png' target='_blank'><img src='figs/footscray_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/footscray_direction_map.png' target='_blank'><img src='figs/footscray_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/footscray_lanes_map.png' target='_blank'><img src='figs/footscray_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -101,7 +101,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
 <figure><a href='figs/footscray_assignment_compare.png' target='_blank'><img src='figs/footscray_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
 <figure><a href='figs/footscray_assignment_compare_x3.png' target='_blank'><img src='figs/footscray_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
 </div>
-<h2>Geelong</h2><p style='background:#e8f4fb;padding:4px 8px'>新方法的结果（11 月 9 日跑完）。限速的片区规则沿用上周的旧规则：新片区规则在 Geelong 把 Geelong West 的 40 扩到了 DTP 为 50 的街道。</p><p><a href='maps/all_areas_results.html#geelong' target='_blank'>打开 Geelong 的可点击网页</a></p><div class='figs'>
+<h2>Geelong</h2><p style='background:#e8f4fb;padding:4px 8px'>新方法的结果（11 月 9 日跑完）。限速的片区规则沿用上周的旧规则：新片区规则在 Geelong 把 Geelong West 的 40 扩到了 DTP 为 50 的街道。</p><p><a href='maps/all_areas_results.html?lang=zh#geelong' target='_blank'>打开 Geelong 的可点击网页</a></p><div class='figs'>
 <figure><a href='figs/geelong_stopline_map.png' target='_blank'><img src='figs/geelong_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
 <figure><a href='figs/geelong_direction_map.png' target='_blank'><img src='figs/geelong_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
 <figure><a href='figs/geelong_lanes_map.png' target='_blank'><img src='figs/geelong_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
@@ -221,6 +221,6 @@ function setLang(l) { document.body.className = l; document.documentElement.lang
   document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.l === l));
   try { localStorage.setItem("irn_lang", l); } catch (e) {} }
 document.querySelectorAll(".lang button").forEach(b => b.onclick = () => setLang(b.dataset.l));
-let l0 = "zh"; try { l0 = new URLSearchParams(location.search).get("lang") || localStorage.getItem("irn_lang") || "zh"; } catch (e) {}
-setLang(l0 === "en" ? "en" : "zh");
+let l0 = "en"; try { l0 = new URLSearchParams(location.search).get("lang") || localStorage.getItem("irn_lang") || "en"; } catch (e) {}
+setLang(l0 === "zh" ? "zh" : "en");                // English unless asked otherwise (the user, 9 November)
 </script></body></html>
