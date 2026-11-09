@@ -1,0 +1,226 @@
+<!doctype html><html lang='zh'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>各区识别结果 / Results by area</title><style>
+body{font-family:'Microsoft YaHei','Segoe UI',system-ui,sans-serif;margin:0 auto;max-width:1100px;padding:16px;color:#222;background:#fff}
+table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;padding:4px 8px}h2{margin-top:28px}img{max-width:100%;border:1px solid #eee}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px}a{color:#2471a3}figure{margin:0}
+.lang{position:fixed;top:10px;right:12px;display:flex;border:1px solid #2471a3;border-radius:4px;overflow:hidden;background:#fff}
+.lang button{border:0;background:#fff;color:#2471a3;padding:3px 9px;cursor:pointer}.lang button.on{background:#2471a3;color:#fff}
+body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='zh'>
+<div class='lang'><button data-l='zh'>中文</button><button data-l='en'>EN</button></div>
+<div class='l-zh'><h1>各区识别结果</h1><p>每个区有可点击的网页（限速、方向、车道、停止线、拍摄点位五个图层）和几张静态图。AI 盲评值是模型盲评的结果，不是真值；真值只指 DTP、议会限速图、Vicmap 和 SCATS 信号配置图纸。OSM 只计它自己有标注的地方，缺失不补。</p>
+<p><a href='maps/all_areas_results.html' target='_blank'><b>打开各区识别结果网页</b></a></p>
+<h2>各区对比</h2><img src='summary_accuracy.png' alt='各区对比'>
+<h2>对比表</h2><p>同口径比较看后两列：在 OSM 有标注的同一批路段上，本方法和 OSM 各自的一致率。</p><table><tr><th>项目</th><th>参照</th><th>区</th><th>本方法（全部）</th><th>本方法（OSM 有标注处）</th><th>OSM（有标注处）</th><th>覆盖</th></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>Victoria Park</td><td>40/48（83.3%）</td><td>78.8%</td><td>21/33（63.6%）</td><td>读出 54/55</td></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>North Melbourne</td><td>158/197（80.2%）</td><td>79.7%</td><td>86/172（50.0%）</td><td>读出 214/215</td></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>Airport West</td><td>9/13（69.2%）</td><td>72.7%</td><td>7/11（63.6%）</td><td>读出 16/17</td></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>Central Melbourne（旧方法）</td><td>208/242（86.0%）</td><td>85.0%</td><td>114/213（53.5%）</td><td>读出 502/502</td></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>Footscray（旧方法）</td><td>105/122（86.1%）</td><td>81.0%</td><td>19/42（45.2%）</td><td>读出 182/182</td></tr>
+<tr><td>停止线车道</td><td>SCATS 图纸</td><td>Geelong</td><td>113/131（86.3%）</td><td>86.7%</td><td>69/90（76.7%）</td><td>读出 152/153</td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>Victoria Park</td><td>108/120（90.0%）</td><td>90.0%</td><td>112/120（93.3%）</td><td>双线车行道 135；整条街判断 520；未单独判断的短段 333</td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>North Melbourne</td><td>无参照</td><td>—</td><td>—</td><td>双线车行道 630；整条街判断 188；点数规则 1；未单独判断的短段 1209</td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>Airport West</td><td>无参照</td><td>—</td><td>—</td><td>双线车行道 251；整条街判断 540；未单独判断的短段 435</td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>Central Melbourne（旧方法）</td><td>110/120（91.7%）</td><td>91.7%</td><td>110/120（91.7%）</td><td></td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>Footscray（旧方法）</td><td>111/120（92.5%）</td><td>92.5%</td><td>112/120（93.3%）</td><td></td></tr>
+<tr><td>方向</td><td>AI 盲评值</td><td>Geelong</td><td>无参照</td><td>—</td><td>—</td><td>双线车行道 309；整条街判断 248；点数规则 1；未单独判断的短段 465</td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>Victoria Park</td><td>769/966（79.6%）</td><td>79.6%</td><td>803/966（83.1%）</td><td>双线车行道 135；整条街判断 520；未单独判断的短段 333</td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>North Melbourne</td><td>1763/1984（88.9%）</td><td>88.9%</td><td>1778/1984（89.6%）</td><td>双线车行道 630；整条街判断 188；点数规则 1；未单独判断的短段 1209</td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>Airport West</td><td>965/1190（81.1%）</td><td>81.1%</td><td>965/1190（81.1%）</td><td>双线车行道 251；整条街判断 540；未单独判断的短段 435</td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>Central Melbourne（旧方法）</td><td>1417/1551（91.4%）</td><td>91.4%</td><td>1417/1551（91.4%）</td><td></td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>Footscray（旧方法）</td><td>821/950（86.4%）</td><td>86.4%</td><td>824/950（86.7%）</td><td></td></tr>
+<tr><td>方向</td><td>Vicmap</td><td>Geelong</td><td>828/1009（82.1%）</td><td>82.1%</td><td>844/1009（83.6%）</td><td>双线车行道 309；整条街判断 248；点数规则 1；未单独判断的短段 465</td></tr>
+<tr><td>方向·读图判断的路段</td><td>Vicmap</td><td>Victoria Park</td><td>543/643（84.4%）</td><td>84.4%</td><td>553/643（86.0%）</td><td>655 段</td></tr>
+<tr><td>方向·读图判断的路段</td><td>Vicmap</td><td>North Melbourne</td><td>728/796（91.5%）</td><td>91.5%</td><td>731/796（91.8%）</td><td>819 段</td></tr>
+<tr><td>方向·读图判断的路段</td><td>Vicmap</td><td>Airport West</td><td>693/761（91.1%）</td><td>91.1%</td><td>699/761（91.9%）</td><td>791 段</td></tr>
+<tr><td>方向·读图判断的路段</td><td>Vicmap</td><td>Geelong</td><td>466/553（84.3%）</td><td>84.3%</td><td>472/553（85.4%）</td><td>558 段</td></tr>
+<tr><td>方向·未单独判断的短段</td><td>Vicmap</td><td>Victoria Park</td><td>226/323（70.0%）</td><td>70.0%</td><td>250/323（77.4%）</td><td>333 段</td></tr>
+<tr><td>方向·未单独判断的短段</td><td>Vicmap</td><td>North Melbourne</td><td>1035/1188（87.1%）</td><td>87.1%</td><td>1047/1188（88.1%）</td><td>1209 段</td></tr>
+<tr><td>方向·未单独判断的短段</td><td>Vicmap</td><td>Airport West</td><td>272/429（63.4%）</td><td>63.4%</td><td>266/429（62.0%）</td><td>435 段</td></tr>
+<tr><td>方向·未单独判断的短段</td><td>Vicmap</td><td>Geelong</td><td>362/456（79.4%）</td><td>79.4%</td><td>372/456（81.6%）</td><td>465 段</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>Victoria Park</td><td>180/185（97.3%）</td><td>80.0%</td><td>13/20（65.0%）</td><td>读图得到 1004/1570</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>North Melbourne</td><td>无参照</td><td>—</td><td>—</td><td>读图得到 862/2401</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>Airport West</td><td>无参照</td><td>—</td><td>—</td><td>读图得到 1203/1892</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>Central Melbourne（旧方法）</td><td>145/154（94.2%）</td><td>88.5%</td><td>46/52（88.5%）</td><td>读图得到 1730/2009</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>Footscray（旧方法）</td><td>179/189（94.7%）</td><td>89.7%</td><td>26/29（89.7%）</td><td>读图得到 1369/1504</td></tr>
+<tr><td>路段车道</td><td>AI 盲评值</td><td>Geelong</td><td>无参照</td><td>—</td><td>—</td><td>读图得到 748/1389</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>Victoria Park</td><td>551/560（98.4%）</td><td>98.4%</td><td>554/558（99.3%）</td><td>有牌依据 940/1502</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>North Melbourne</td><td>无参照</td><td>—</td><td>—</td><td>有牌依据 1711/2357</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>Airport West</td><td>无参照</td><td>—</td><td>—</td><td>有牌依据 632/1706</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>Central Melbourne（旧方法）</td><td>2567/2721（94.3%）</td><td>96.8%</td><td>2026/2221（91.2%）</td><td>有牌依据 3025/4198</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>Footscray（旧方法）</td><td>1261/1338（94.2%）</td><td>95.3%</td><td>699/1103（63.4%）</td><td>有牌依据 1590/2314</td></tr>
+<tr><td>限速</td><td>议会限速图</td><td>Geelong</td><td>无参照</td><td>—</td><td>—</td><td>有牌依据 956/1351</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Victoria Park</td><td>948/1056（89.8%）</td><td>89.4%</td><td>741/782（94.8%）</td><td>有牌依据 940/1502</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>North Melbourne</td><td>1413/1913（73.9%）</td><td>75.2%</td><td>1251/1569（79.7%）</td><td>有牌依据 1711/2357</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Airport West</td><td>1242/1482（83.8%）</td><td>78.9%</td><td>314/607（51.7%）</td><td>有牌依据 632/1706</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Central Melbourne（旧方法）</td><td>2248/2673（84.1%）</td><td>86.6%</td><td>1820/2190（83.1%）</td><td>有牌依据 3025/4198</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Footscray（旧方法）</td><td>1307/1912（68.4%）</td><td>69.8%</td><td>808/1575（51.3%）</td><td>有牌依据 1590/2314</td></tr>
+<tr><td>限速</td><td>DTP（不计 OSM30/DTP40）</td><td>Geelong</td><td>914/1171（78.1%）</td><td>83.2%</td><td>733/850（86.2%）</td><td>有牌依据 956/1351</td></tr>
+</table>
+<h2>Victoria Park</h2><p><a href='maps/all_areas_results.html#victoriapark' target='_blank'>打开 Victoria Park 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/victoriapark_stopline_map.png' target='_blank'><img src='figs/victoriapark_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/victoriapark_direction_map.png' target='_blank'><img src='figs/victoriapark_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/victoriapark_lanes_map.png' target='_blank'><img src='figs/victoriapark_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/victoriapark_speed_map.png' target='_blank'><img src='figs/victoriapark_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/victoriapark_photo_points.png' target='_blank'><img src='figs/victoriapark_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/victoriapark_assignment_compare.png' target='_blank'><img src='figs/victoriapark_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/victoriapark_assignment_compare_x3.png' target='_blank'><img src='figs/victoriapark_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+<h2>North Melbourne</h2><p><a href='maps/all_areas_results.html#northmelbourne' target='_blank'>打开 North Melbourne 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/northmelbourne_stopline_map.png' target='_blank'><img src='figs/northmelbourne_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/northmelbourne_direction_map.png' target='_blank'><img src='figs/northmelbourne_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/northmelbourne_lanes_map.png' target='_blank'><img src='figs/northmelbourne_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/northmelbourne_speed_map.png' target='_blank'><img src='figs/northmelbourne_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/northmelbourne_photo_points.png' target='_blank'><img src='figs/northmelbourne_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/northmelbourne_assignment_compare.png' target='_blank'><img src='figs/northmelbourne_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/northmelbourne_assignment_compare_x3.png' target='_blank'><img src='figs/northmelbourne_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+<h2>Airport West</h2><p><a href='maps/all_areas_results.html#airportwest' target='_blank'>打开 Airport West 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/airportwest_stopline_map.png' target='_blank'><img src='figs/airportwest_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/airportwest_direction_map.png' target='_blank'><img src='figs/airportwest_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/airportwest_lanes_map.png' target='_blank'><img src='figs/airportwest_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/airportwest_speed_map.png' target='_blank'><img src='figs/airportwest_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/airportwest_photo_points.png' target='_blank'><img src='figs/airportwest_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/airportwest_assignment_compare.png' target='_blank'><img src='figs/airportwest_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/airportwest_assignment_compare_x3.png' target='_blank'><img src='figs/airportwest_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+<h2>Central Melbourne（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html#central' target='_blank'>打开 Central Melbourne 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/central_stopline_map.png' target='_blank'><img src='figs/central_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/central_direction_map.png' target='_blank'><img src='figs/central_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/central_lanes_map.png' target='_blank'><img src='figs/central_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/central_speed_map.png' target='_blank'><img src='figs/central_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/central_photo_points.png' target='_blank'><img src='figs/central_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/central_assignment_compare.png' target='_blank'><img src='figs/central_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/central_assignment_compare_x3.png' target='_blank'><img src='figs/central_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+<h2>Footscray（旧方法）</h2><p style='background:#fdebd0;padding:4px 8px'>使用上周的旧识别方法进行识别的。新方法的结果还在计算中。</p><p><a href='maps/all_areas_results.html#footscray' target='_blank'>打开 Footscray 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/footscray_stopline_map.png' target='_blank'><img src='figs/footscray_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/footscray_direction_map.png' target='_blank'><img src='figs/footscray_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/footscray_lanes_map.png' target='_blank'><img src='figs/footscray_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/footscray_speed_map.png' target='_blank'><img src='figs/footscray_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/footscray_photo_points.png' target='_blank'><img src='figs/footscray_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/footscray_assignment_compare.png' target='_blank'><img src='figs/footscray_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/footscray_assignment_compare_x3.png' target='_blank'><img src='figs/footscray_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+<h2>Geelong</h2><p style='background:#e8f4fb;padding:4px 8px'>新方法的结果（11 月 9 日跑完）。限速的片区规则沿用上周的旧规则：新片区规则在 Geelong 把 Geelong West 的 40 扩到了 DTP 为 50 的街道。</p><p><a href='maps/all_areas_results.html#geelong' target='_blank'>打开 Geelong 的可点击网页</a></p><div class='figs'>
+<figure><a href='figs/geelong_stopline_map.png' target='_blank'><img src='figs/geelong_stopline_map.png' alt='停止线车道数'></a><figcaption>停止线车道数</figcaption></figure>
+<figure><a href='figs/geelong_direction_map.png' target='_blank'><img src='figs/geelong_direction_map.png' alt='道路方向'></a><figcaption>道路方向</figcaption></figure>
+<figure><a href='figs/geelong_lanes_map.png' target='_blank'><img src='figs/geelong_lanes_map.png' alt='路段车道数'></a><figcaption>路段车道数</figcaption></figure>
+<figure><a href='figs/geelong_speed_map.png' target='_blank'><img src='figs/geelong_speed_map.png' alt='限速'></a><figcaption>限速</figcaption></figure>
+<figure><a href='figs/geelong_photo_points.png' target='_blank'><img src='figs/geelong_photo_points.png' alt='街景拍摄点位'></a><figcaption>街景拍摄点位</figcaption></figure>
+<figure><a href='figs/geelong_assignment_compare.png' target='_blank'><img src='figs/geelong_assignment_compare.png' alt='交通流分配对比（原需求）'></a><figcaption>交通流分配对比（原需求）</figcaption></figure>
+<figure><a href='figs/geelong_assignment_compare_x3.png' target='_blank'><img src='figs/geelong_assignment_compare_x3.png' alt='交通流分配对比（3 倍需求）'></a><figcaption>交通流分配对比（3 倍需求）</figcaption></figure>
+</div>
+</div>
+<div class='l-en'><h1>Results by area</h1><p>Each area has a clickable map (speed limit, direction, lanes, stop line and photo layers) and static figures. The AI blind value is a model's blind judgment, not truth; truth means only DTP, the council's speed map, Vicmap and the SCATS signal configuration sheets. OSM counts only where it tags; a missing tag is never filled.</p>
+<p><a href='maps/all_areas_results.html?lang=en' target='_blank'><b>Open the results map of every area</b></a></p>
+<h2>Comparison across areas</h2><img src='summary_accuracy_en.png' alt='Comparison across areas'>
+<h2>Comparison table</h2><p>For a like-for-like comparison read the last two columns: the method and OSM on the same items, those OSM tags.</p><table><tr><th>Item</th><th>Reference</th><th>Area</th><th>Method (all)</th><th>Method (where OSM tags)</th><th>OSM (where it tags)</th><th>Coverage</th></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>Victoria Park</td><td>40/48 (83.3%)</td><td>78.8%</td><td>21/33 (63.6%)</td><td>read 54/55</td></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>North Melbourne</td><td>158/197 (80.2%)</td><td>79.7%</td><td>86/172 (50.0%)</td><td>read 214/215</td></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>Airport West</td><td>9/13 (69.2%)</td><td>72.7%</td><td>7/11 (63.6%)</td><td>read 16/17</td></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>Central Melbourne (old method)</td><td>208/242 (86.0%)</td><td>85.0%</td><td>114/213 (53.5%)</td><td>read 502/502</td></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>Footscray (old method)</td><td>105/122 (86.1%)</td><td>81.0%</td><td>19/42 (45.2%)</td><td>read 182/182</td></tr>
+<tr><td>Lanes at the stop line</td><td>SCATS sheets</td><td>Geelong</td><td>113/131 (86.3%)</td><td>86.7%</td><td>69/90 (76.7%)</td><td>read 152/153</td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>Victoria Park</td><td>108/120 (90.0%)</td><td>90.0%</td><td>112/120 (93.3%)</td><td>twin carriageway 135; whole-street judgment 520; short pieces not judged 333</td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>North Melbourne</td><td>no reference</td><td>—</td><td>—</td><td>twin carriageway 630; whole-street judgment 188; points rule 1; short pieces not judged 1209</td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>Airport West</td><td>no reference</td><td>—</td><td>—</td><td>twin carriageway 251; whole-street judgment 540; short pieces not judged 435</td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>Central Melbourne (old method)</td><td>110/120 (91.7%)</td><td>91.7%</td><td>110/120 (91.7%)</td><td></td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>Footscray (old method)</td><td>111/120 (92.5%)</td><td>92.5%</td><td>112/120 (93.3%)</td><td></td></tr>
+<tr><td>Direction</td><td>AI blind value</td><td>Geelong</td><td>no reference</td><td>—</td><td>—</td><td>twin carriageway 309; whole-street judgment 248; points rule 1; short pieces not judged 465</td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>Victoria Park</td><td>769/966 (79.6%)</td><td>79.6%</td><td>803/966 (83.1%)</td><td>twin carriageway 135; whole-street judgment 520; short pieces not judged 333</td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>North Melbourne</td><td>1763/1984 (88.9%)</td><td>88.9%</td><td>1778/1984 (89.6%)</td><td>twin carriageway 630; whole-street judgment 188; points rule 1; short pieces not judged 1209</td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>Airport West</td><td>965/1190 (81.1%)</td><td>81.1%</td><td>965/1190 (81.1%)</td><td>twin carriageway 251; whole-street judgment 540; short pieces not judged 435</td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>Central Melbourne (old method)</td><td>1417/1551 (91.4%)</td><td>91.4%</td><td>1417/1551 (91.4%)</td><td></td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>Footscray (old method)</td><td>821/950 (86.4%)</td><td>86.4%</td><td>824/950 (86.7%)</td><td></td></tr>
+<tr><td>Direction</td><td>Vicmap</td><td>Geelong</td><td>828/1009 (82.1%)</td><td>82.1%</td><td>844/1009 (83.6%)</td><td>twin carriageway 309; whole-street judgment 248; points rule 1; short pieces not judged 465</td></tr>
+<tr><td>Direction, sections read</td><td>Vicmap</td><td>Victoria Park</td><td>543/643 (84.4%)</td><td>84.4%</td><td>553/643 (86.0%)</td><td>655 sections</td></tr>
+<tr><td>Direction, sections read</td><td>Vicmap</td><td>North Melbourne</td><td>728/796 (91.5%)</td><td>91.5%</td><td>731/796 (91.8%)</td><td>819 sections</td></tr>
+<tr><td>Direction, sections read</td><td>Vicmap</td><td>Airport West</td><td>693/761 (91.1%)</td><td>91.1%</td><td>699/761 (91.9%)</td><td>791 sections</td></tr>
+<tr><td>Direction, sections read</td><td>Vicmap</td><td>Geelong</td><td>466/553 (84.3%)</td><td>84.3%</td><td>472/553 (85.4%)</td><td>558 sections</td></tr>
+<tr><td>Direction, short pieces not judged</td><td>Vicmap</td><td>Victoria Park</td><td>226/323 (70.0%)</td><td>70.0%</td><td>250/323 (77.4%)</td><td>333 sections</td></tr>
+<tr><td>Direction, short pieces not judged</td><td>Vicmap</td><td>North Melbourne</td><td>1035/1188 (87.1%)</td><td>87.1%</td><td>1047/1188 (88.1%)</td><td>1209 sections</td></tr>
+<tr><td>Direction, short pieces not judged</td><td>Vicmap</td><td>Airport West</td><td>272/429 (63.4%)</td><td>63.4%</td><td>266/429 (62.0%)</td><td>435 sections</td></tr>
+<tr><td>Direction, short pieces not judged</td><td>Vicmap</td><td>Geelong</td><td>362/456 (79.4%)</td><td>79.4%</td><td>372/456 (81.6%)</td><td>465 sections</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>Victoria Park</td><td>180/185 (97.3%)</td><td>80.0%</td><td>13/20 (65.0%)</td><td>read from photos 1004/1570</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>North Melbourne</td><td>no reference</td><td>—</td><td>—</td><td>read from photos 862/2401</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>Airport West</td><td>no reference</td><td>—</td><td>—</td><td>read from photos 1203/1892</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>Central Melbourne (old method)</td><td>145/154 (94.2%)</td><td>88.5%</td><td>46/52 (88.5%)</td><td>read from photos 1730/2009</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>Footscray (old method)</td><td>179/189 (94.7%)</td><td>89.7%</td><td>26/29 (89.7%)</td><td>read from photos 1369/1504</td></tr>
+<tr><td>Mid-block lanes</td><td>AI blind value</td><td>Geelong</td><td>no reference</td><td>—</td><td>—</td><td>read from photos 748/1389</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>Victoria Park</td><td>551/560 (98.4%)</td><td>98.4%</td><td>554/558 (99.3%)</td><td>based on a sign 940/1502</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>North Melbourne</td><td>no reference</td><td>—</td><td>—</td><td>based on a sign 1711/2357</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>Airport West</td><td>no reference</td><td>—</td><td>—</td><td>based on a sign 632/1706</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>Central Melbourne (old method)</td><td>2567/2721 (94.3%)</td><td>96.8%</td><td>2026/2221 (91.2%)</td><td>based on a sign 3025/4198</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>Footscray (old method)</td><td>1261/1338 (94.2%)</td><td>95.3%</td><td>699/1103 (63.4%)</td><td>based on a sign 1590/2314</td></tr>
+<tr><td>Speed limit</td><td>Council map</td><td>Geelong</td><td>no reference</td><td>—</td><td>—</td><td>based on a sign 956/1351</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>Victoria Park</td><td>948/1056 (89.8%)</td><td>89.4%</td><td>741/782 (94.8%)</td><td>based on a sign 940/1502</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>North Melbourne</td><td>1413/1913 (73.9%)</td><td>75.2%</td><td>1251/1569 (79.7%)</td><td>based on a sign 1711/2357</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>Airport West</td><td>1242/1482 (83.8%)</td><td>78.9%</td><td>314/607 (51.7%)</td><td>based on a sign 632/1706</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>Central Melbourne (old method)</td><td>2248/2673 (84.1%)</td><td>86.6%</td><td>1820/2190 (83.1%)</td><td>based on a sign 3025/4198</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>Footscray (old method)</td><td>1307/1912 (68.4%)</td><td>69.8%</td><td>808/1575 (51.3%)</td><td>based on a sign 1590/2314</td></tr>
+<tr><td>Speed limit</td><td>DTP (without OSM 30 / DTP 40)</td><td>Geelong</td><td>914/1171 (78.1%)</td><td>83.2%</td><td>733/850 (86.2%)</td><td>based on a sign 956/1351</td></tr>
+</table>
+<h2>Victoria Park</h2><p><a href='maps/all_areas_results.html?lang=en#victoriapark' target='_blank'>Open the clickable map of Victoria Park</a></p><div class='figs'>
+<figure><a href='figs/victoriapark_stopline_map_en.png' target='_blank'><img src='figs/victoriapark_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/victoriapark_direction_map_en.png' target='_blank'><img src='figs/victoriapark_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/victoriapark_lanes_map_en.png' target='_blank'><img src='figs/victoriapark_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/victoriapark_speed_map_en.png' target='_blank'><img src='figs/victoriapark_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/victoriapark_photo_points_en.png' target='_blank'><img src='figs/victoriapark_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/victoriapark_assignment_compare_en.png' target='_blank'><img src='figs/victoriapark_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/victoriapark_assignment_compare_x3_en.png' target='_blank'><img src='figs/victoriapark_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+<h2>North Melbourne</h2><p><a href='maps/all_areas_results.html?lang=en#northmelbourne' target='_blank'>Open the clickable map of North Melbourne</a></p><div class='figs'>
+<figure><a href='figs/northmelbourne_stopline_map_en.png' target='_blank'><img src='figs/northmelbourne_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/northmelbourne_direction_map_en.png' target='_blank'><img src='figs/northmelbourne_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/northmelbourne_lanes_map_en.png' target='_blank'><img src='figs/northmelbourne_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/northmelbourne_speed_map_en.png' target='_blank'><img src='figs/northmelbourne_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/northmelbourne_photo_points_en.png' target='_blank'><img src='figs/northmelbourne_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/northmelbourne_assignment_compare_en.png' target='_blank'><img src='figs/northmelbourne_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/northmelbourne_assignment_compare_x3_en.png' target='_blank'><img src='figs/northmelbourne_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+<h2>Airport West</h2><p><a href='maps/all_areas_results.html?lang=en#airportwest' target='_blank'>Open the clickable map of Airport West</a></p><div class='figs'>
+<figure><a href='figs/airportwest_stopline_map_en.png' target='_blank'><img src='figs/airportwest_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/airportwest_direction_map_en.png' target='_blank'><img src='figs/airportwest_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/airportwest_lanes_map_en.png' target='_blank'><img src='figs/airportwest_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/airportwest_speed_map_en.png' target='_blank'><img src='figs/airportwest_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/airportwest_photo_points_en.png' target='_blank'><img src='figs/airportwest_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/airportwest_assignment_compare_en.png' target='_blank'><img src='figs/airportwest_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/airportwest_assignment_compare_x3_en.png' target='_blank'><img src='figs/airportwest_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+<h2>Central Melbourne (old method)</h2><p style='background:#fdebd0;padding:4px 8px'>Identified with last week's old method. The new method's results are still being computed.</p><p><a href='maps/all_areas_results.html?lang=en#central' target='_blank'>Open the clickable map of Central Melbourne</a></p><div class='figs'>
+<figure><a href='figs/central_stopline_map_en.png' target='_blank'><img src='figs/central_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/central_direction_map_en.png' target='_blank'><img src='figs/central_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/central_lanes_map_en.png' target='_blank'><img src='figs/central_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/central_speed_map_en.png' target='_blank'><img src='figs/central_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/central_photo_points_en.png' target='_blank'><img src='figs/central_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/central_assignment_compare_en.png' target='_blank'><img src='figs/central_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/central_assignment_compare_x3_en.png' target='_blank'><img src='figs/central_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+<h2>Footscray (old method)</h2><p style='background:#fdebd0;padding:4px 8px'>Identified with last week's old method. The new method's results are still being computed.</p><p><a href='maps/all_areas_results.html?lang=en#footscray' target='_blank'>Open the clickable map of Footscray</a></p><div class='figs'>
+<figure><a href='figs/footscray_stopline_map_en.png' target='_blank'><img src='figs/footscray_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/footscray_direction_map_en.png' target='_blank'><img src='figs/footscray_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/footscray_lanes_map_en.png' target='_blank'><img src='figs/footscray_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/footscray_speed_map_en.png' target='_blank'><img src='figs/footscray_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/footscray_photo_points_en.png' target='_blank'><img src='figs/footscray_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/footscray_assignment_compare_en.png' target='_blank'><img src='figs/footscray_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/footscray_assignment_compare_x3_en.png' target='_blank'><img src='figs/footscray_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+<h2>Geelong</h2><p style='background:#e8f4fb;padding:4px 8px'>The new method's results (run finished on 9 November). The speed area rule is last week's: the new rule spread Geelong West's 40 to streets where DTP has 50.</p><p><a href='maps/all_areas_results.html?lang=en#geelong' target='_blank'>Open the clickable map of Geelong</a></p><div class='figs'>
+<figure><a href='figs/geelong_stopline_map_en.png' target='_blank'><img src='figs/geelong_stopline_map_en.png' alt='Lanes at the stop line'></a><figcaption>Lanes at the stop line</figcaption></figure>
+<figure><a href='figs/geelong_direction_map_en.png' target='_blank'><img src='figs/geelong_direction_map_en.png' alt='Direction'></a><figcaption>Direction</figcaption></figure>
+<figure><a href='figs/geelong_lanes_map_en.png' target='_blank'><img src='figs/geelong_lanes_map_en.png' alt='Mid-block lanes'></a><figcaption>Mid-block lanes</figcaption></figure>
+<figure><a href='figs/geelong_speed_map_en.png' target='_blank'><img src='figs/geelong_speed_map_en.png' alt='Speed limit'></a><figcaption>Speed limit</figcaption></figure>
+<figure><a href='figs/geelong_photo_points_en.png' target='_blank'><img src='figs/geelong_photo_points_en.png' alt='Street View photo points'></a><figcaption>Street View photo points</figcaption></figure>
+<figure><a href='figs/geelong_assignment_compare_en.png' target='_blank'><img src='figs/geelong_assignment_compare_en.png' alt='Assignment comparison (demand x1)'></a><figcaption>Assignment comparison (demand x1)</figcaption></figure>
+<figure><a href='figs/geelong_assignment_compare_x3_en.png' target='_blank'><img src='figs/geelong_assignment_compare_x3_en.png' alt='Assignment comparison (demand x3)'></a><figcaption>Assignment comparison (demand x3)</figcaption></figure>
+</div>
+</div>
+<script>
+function setLang(l) { document.body.className = l; document.documentElement.lang = l;
+  document.title = l === "en" ? "Results by area" : "各区识别结果";
+  document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.l === l));
+  try { localStorage.setItem("irn_lang", l); } catch (e) {} }
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => setLang(b.dataset.l));
+let l0 = "zh"; try { l0 = new URLSearchParams(location.search).get("lang") || localStorage.getItem("irn_lang") || "zh"; } catch (e) {}
+setLang(l0 === "en" ? "en" : "zh");
+</script></body></html>
