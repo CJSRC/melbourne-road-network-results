@@ -10,10 +10,10 @@ const SIGNS = [{"y":-37.792476,"x":144.968118,"n":"Cemetery Road East","id":"ce0
 const zh = (new URLSearchParams(location.search).get('lang') || 'en') === 'zh';
 const T = zh ? {signs: '路口标志规则', pockets: 'Pocket lane', ban: '有禁止', control: '让行 / 停车 / 环岛', other: '其他规则', none: '没有规则',
                 p1: 's2 < 30 m', p2: 's2 30–60 m', p3: 's2 ≥ 60 m', pn: '没有看到 pocket', pu: '影像不可用', ctrl: '路口控制',
-                note: '都是 AI 读数，不是真值', sat: '卫星', sv: '街景俯视', median: '中央侧', kerb: '路缘侧', conf: '置信度', flags: '标记'}
+                sat: '卫星', sv: '街景俯视', median: '中央侧', kerb: '路缘侧', conf: '置信度', flags: '标记'}
              : {signs: 'Sign rules', pockets: 'Pocket lanes', ban: 'A ban', control: 'Give way / stop / roundabout', other: 'Other rules',
                 none: 'No rule', p1: 's2 < 30 m', p2: 's2 30–60 m', p3: 's2 ≥ 60 m', pn: 'No pocket seen', pu: 'Imagery unusable',
-                ctrl: 'Control', note: 'All values are AI readings, not truth', sat: 'satellite', sv: 'Street View top-down',
+                ctrl: 'Control', sat: 'satellite', sv: 'Street View top-down',
                 median: 'median edge', kerb: 'kerb edge', conf: 'confidence', flags: 'flags'};
 const map = L.map('map', {preferCanvas: true}).setView([-37.80, 144.95], 13);
 const street = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {attribution: "Tiles &copy; Esri", maxZoom: 19}).addTo(map);
