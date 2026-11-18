@@ -1,6 +1,6 @@
 # Results by area (9 November 2026)
 
-Agreement = items the same as the reference / items with a reference. OSM counts only where it tags (a filled-in default does not count). The AI blind value is not truth.
+Agreement = items the same as the reference / items with a reference. OSM counts only where it tags (a filled-in default does not count).
 
 | Item | Reference | Area | Method (all) | Method (where OSM tags) | OSM (where it tags) | Coverage |
 |---|---|---|---|---|---|---|

@@ -20,14 +20,14 @@ const street = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services
 const sColour = {ban: '#c0392b', control: '#e67e22', other: '#2471a3', none: '#aab7b8'};
 const signLayer = L.layerGroup(SIGNS.map(s => L.circleMarker([s.y, s.x], {radius: s.k === 'none' ? 3 : 5, color: '#fff', weight: 1,
     fillColor: sColour[s.k], fillOpacity: .9}).bindPopup(`<div class='pop'><b>${s.n}</b> (${s.id})<br>` +
-    (s.c ? `${T.ctrl}: ${s.c}<br>` : '') + (s.r.length ? s.r.join('<br>') : T.none) + `<br><i>${T.note}</i></div>`)));
+    (s.c ? `${T.ctrl}: ${s.c}<br>` : '') + (s.r.length ? s.r.join('<br>') : T.none) + `</div>`)));
 function pColour(p) { if (p.s !== 'pocket') return p.s === 'no pocket' ? '#aab7b8' : '#7f8c8d';
   return p.s2 === null ? '#2471a3' : p.s2 < 30 ? '#85c1e9' : p.s2 < 60 ? '#2471a3' : '#154360'; }
 const pocketLayer = L.layerGroup(POCKETS.map(p => L.circleMarker([p.y, p.x], {radius: 6, color: '#fff', weight: 1,
     fillColor: pColour(p), fillOpacity: .95}).bindPopup(`<div class='pop'><b>${p.n}</b> (${p.id})<br>` +
     (p.s === 'pocket' ? `s1 ${p.s1} m, s2 ${p.s2} m<br>${p.e === 'median' ? T.median : T.kerb}, ${p.kd}<br>${T.conf}: ${p.cf}<br>` +
       (p.f ? `${T.flags}: ${p.f}<br>` : '') : (p.s === 'no pocket' ? T.pn : T.pu) + '<br>') +
-    `${p.v === 'A' ? T.sat : T.sv}<br><i>${T.note}</i></div>`)));
+    `${p.v === 'A' ? T.sat : T.sv}</div>`)));
 signLayer.addTo(map); pocketLayer.addTo(map);
 const ov = {}; ov[T.signs] = signLayer; ov[T.pockets] = pocketLayer;
 L.control.layers(null, ov, {collapsed: false}).addTo(map);

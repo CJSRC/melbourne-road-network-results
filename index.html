@@ -7,7 +7,7 @@ table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #ddd;paddin
 .lang button{border:0;background:#fff;color:#2471a3;padding:3px 9px;cursor:pointer}.lang button.on{background:#2471a3;color:#fff}
 body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='en'>
 <div class='lang'><button data-l='zh'>中文</button><button data-l='en'>EN</button></div>
-<div class='l-zh'><h1>各区识别结果</h1><p>每个区有可点击的网页（限速、方向、车道、停止线、拍摄点位五个图层）和几张静态图。AI 盲评值是模型盲评的结果，不是真值；真值只指 DTP、议会限速图、Vicmap 和 SCATS 信号配置图纸。OSM 只计它自己有标注的地方，缺失不补。</p><p>另见两项新内容：<a href='#signs'>路口交通标志</a> · <a href='#pockets'>Pocket lane 长度</a></p>
+<div class='l-zh'><h1>各区识别结果</h1><p>每个区有可点击的网页（限速、方向、车道、停止线、拍摄点位五个图层）和几张静态图。OSM 只计它自己有标注的地方，缺失不补。</p><p>另见两项新内容：<a href='#signs'>路口交通标志</a> · <a href='#pockets'>Pocket lane 长度</a></p>
 <p><a href='maps/all_areas_results.html?lang=zh' target='_blank'><b>打开各区识别结果网页</b></a></p>
 <h2>各区对比</h2><img src='summary_accuracy.png' alt='各区对比'>
 <h2>对比表</h2><p>同口径比较看后两列：在 OSM 有标注的同一批路段上，本方法和 OSM 各自的一致率。</p><table><tr><th>项目</th><th>参照</th><th>区</th><th>本方法（全部）</th><th>本方法（OSM 有标注处）</th><th>OSM（有标注处）</th><th>覆盖</th></tr>
@@ -116,14 +116,14 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='en'>
 <div class='figs'><figure><a href='figs/signs_rules.png' target='_blank'><img src='figs/signs_rules.png' alt='规则'></a><figcaption>按类别的规则条数</figcaption></figure>
 <figure><a href='figs/signs_control.png' target='_blank'><img src='figs/signs_control.png' alt='让行控制'></a><figcaption>无信号灯路口各进口道的路口控制</figcaption></figure></div>
 <h2 id='pockets'>Pocket lane 长度</h2>
-<p>Pocket lane 是停止线前加出的车道（停止线处车道比路段中段多）。对普查认为有加出车道的 658 条信号灯进口道，沿路把卫星影像拉直成带尺子的条带（被树或建筑遮挡的用街景俯视拼图，并附三张沿路的街景照片；没有看到 pocket 且条带短于 100 m 的，延长到 100 m 再读一遍），大模型读出 s1（满宽点）和 s2（渐变起点），都从该车道自己的停止线量起。每条读 3 次取中位数，相差超过 5 m 的放大复核一次。下面都是 AI 读数。</p>
+<p>Pocket lane 是停止线前加出的车道（停止线处车道比路段中段多）。对普查认为有加出车道的 658 条信号灯进口道，沿路把卫星影像拉直成带尺子的条带（被树或建筑遮挡的用街景俯视拼图，并附三张沿路的街景照片；没有看到 pocket 且条带短于 100 m 的，延长到 100 m 再读一遍），大模型读出 s1（满宽点）和 s2（渐变起点），都从该车道自己的停止线量起。每条读 3 次取中位数，相差超过 5 m 的放大复核一次。</p>
 <table><tr><th>进口道</th><th>有 pocket</th><th>没有看到</th><th>影像不可用</th><th>中央侧转弯道 s1 / s2 中位数</th></tr><tr><td>658</td><td>496（卫星 414，街景 82）</td><td>151</td><td>11</td><td>28.0 / 45.0 m</td></tr></table>
 <p><a href='maps/signs_pockets.html?lang=zh' target='_blank'>打开可点击地图（每条进口道的规则和 pocket 读数）</a></p>
 <p>重复性：卫星图上中央侧转弯道两轮独立读取（不同提示词、不同条带长度），s2 相差中位数 0.5 m，84% 在 3 m 以内。路缘侧（停车结束后的车道）和街景俯视的读数置信度较低，已在数据中标出。</p>
 <div class='figs'><figure><a href='figs/pockets_lengths.png' target='_blank'><img src='figs/pockets_lengths.png' alt='长度'></a><figcaption>每条进口道的 pocket：s1、s2 分布</figcaption></figure>
 <figure><a href='figs/pockets_by_area.png' target='_blank'><img src='figs/pockets_by_area.png' alt='各区'></a><figcaption>各区结果</figcaption></figure></div>
 </div>
-<div class='l-en'><h1>Results by area</h1><p>Each area has a clickable map (speed limit, direction, lanes, stop line and photo layers) and static figures. The AI blind value is a model's blind judgment, not truth; truth means only DTP, the council's speed map, Vicmap and the SCATS signal configuration sheets. OSM counts only where it tags; a missing tag is never filled.</p><p>Also: <a href='#signs-en'>Intersection signs</a> · <a href='#pockets-en'>Pocket lane lengths</a></p>
+<div class='l-en'><h1>Results by area</h1><p>Each area has a clickable map (speed limit, direction, lanes, stop line and photo layers) and static figures. OSM counts only where it tags; a missing tag is never filled.</p><p>Also: <a href='#signs-en'>Intersection signs</a> · <a href='#pockets-en'>Pocket lane lengths</a></p>
 <p><a href='maps/all_areas_results.html?lang=en' target='_blank'><b>Open the results map of every area</b></a></p>
 <h2>Comparison across areas</h2><img src='summary_accuracy_en.png' alt='Comparison across areas'>
 <h2>Comparison table</h2><p>For a like-for-like comparison read the last two columns: the method and OSM on the same items, those OSM tags.</p><table><tr><th>Item</th><th>Reference</th><th>Area</th><th>Method (all)</th><th>Method (where OSM tags)</th><th>OSM (where it tags)</th><th>Coverage</th></tr>
@@ -232,7 +232,7 @@ body.en .l-zh,body.zh .l-en{display:none}</style></head><body class='en'>
 <div class='figs'><figure><a href='figs/signs_rules_en.png' target='_blank'><img src='figs/signs_rules_en.png' alt='Rules'></a><figcaption>Rules by kind</figcaption></figure>
 <figure><a href='figs/signs_control_en.png' target='_blank'><img src='figs/signs_control_en.png' alt='Control'></a><figcaption>Control of each unsignalised approach</figcaption></figure></div>
 <h2 id='pockets-en'>Pocket lane lengths</h2>
-<p>A pocket lane is a lane added before the stop line (more lanes at the stop line than mid-block). For the 658 signalised approaches with an added lane by the census, satellite imagery is straightened along the road into a ruled strip (a Street View top-down mosaic with three Street View photos where trees or buildings hide the road; where no pocket was seen on a strip under 100 m, it is read again on 100 m). A large model reads s1 (full-width point) and s2 (taper start), both from the lane's own stop line. Each approach is read three times; values whose readings spread over 5 m are checked once in a close-up. All values below are AI readings.</p>
+<p>A pocket lane is a lane added before the stop line (more lanes at the stop line than mid-block). For the 658 signalised approaches with an added lane by the census, satellite imagery is straightened along the road into a ruled strip (a Street View top-down mosaic with three Street View photos where trees or buildings hide the road; where no pocket was seen on a strip under 100 m, it is read again on 100 m). A large model reads s1 (full-width point) and s2 (taper start), both from the lane's own stop line. Each approach is read three times; values whose readings spread over 5 m are checked once in a close-up.</p>
 <table><tr><th>Approaches</th><th>Pocket</th><th>None seen</th><th>Imagery unusable</th><th>Median-edge bays: s1 / s2 median</th></tr><tr><td>658</td><td>496 (satellite 414, Street View 82)</td><td>151</td><td>11</td><td>28.0 / 45.0 m</td></tr></table>
 <p><a href='maps/signs_pockets.html?lang=en' target='_blank'>Open the clickable map (each approach's rules and pocket readings)</a></p>
 <p>Repeatability: on the satellite, two independent runs (different prompts and strip lengths) differ on a median-edge bay's s2 by a median of 0.5 m, 84% within 3 m. Kerbside lanes (where parking ends) and Street View readings have lower confidence and are flagged in the data.</p>
